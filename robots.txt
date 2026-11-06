@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://luizpht.com.br/sitemap.xml
+
