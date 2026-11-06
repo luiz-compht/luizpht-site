@@ -25,7 +25,8 @@ img{display:block;max-width:100%}
 .bar{flex:none;height:28px;display:flex;align-items:center;gap:6px;padding:0 10px;background:var(--panel2);border-bottom:1px solid var(--line);cursor:grab;color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.08em;user-select:none;white-space:nowrap;overflow:hidden}
 .bar b{flex:none;width:8px;height:8px;border-radius:50%;background:var(--line)}
 .bar b:first-child{background:var(--bronze)}
-.bar .count,.bar .ratio{margin-left:auto;color:var(--sand);text-transform:none}
+.bar .count,.bar .ratio{margin-left:auto;color:var(--sand);text-transform:none;flex:none;padding-left:8px}
+#vname{min-width:0;overflow:hidden;text-overflow:ellipsis}
 .bar .x{display:none;margin-left:auto;font-size:14px;color:var(--txt)}
 .float{animation:float 6s ease-in-out infinite}
 @keyframes float{50%{translate:0 -6px}}
@@ -137,8 +138,23 @@ img{display:block;max-width:100%}
   .float{animation:none}
   .panel{position:static;transform:none!important;box-shadow:none}
   .bar{cursor:default}
-  #viewer{--h:min(calc((100vw - 24px) * 9 / 16),calc(100dvh - 370px));align-self:center;flex:none;margin:auto}
-  #viewer.vert{--h:calc(100dvh - 370px);width:calc(var(--h) * 9 / 16)}
+  /* no celular o monitor ocupa sempre a largura toda; vídeo vertical fica com faixas laterais, como no editor */
+  #viewer,#viewer.vert{width:calc(100vw - 24px);align-self:center;flex:none;margin:auto;transition:none}
+  #viewer{--h:calc((100vw - 24px) * 9 / 16)}
+  #viewer.vert{--h:max(calc((100vw - 24px) * 9 / 16),calc(100dvh - 400px))}
+  .vert .screen #poster{object-fit:contain}
+  .screen{transition:height .4s ease}
+  .lbl{display:none}
+  .tag{font-size:9px;top:5%}
+  .cap{bottom:6%;left:5%;right:5%}
+  .cap h2,.vert .cap h2{font-size:clamp(17px,5.4vw,24px)}
+  .cap p,.vert .cap p{font-size:11.5px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .play{width:52px;height:52px;font-size:16px;margin:0;left:50%;top:40%;transform:translate(-50%,-50%)}
+  .play:hover{transform:translate(-50%,-50%) scale(1.1)}
+  .transport,.vert .transport{gap:6px;padding:8px 10px}
+  .transport .tc,.vert .transport .tc{display:block;font-size:11px}
+  .transport .btn{padding:4px 6px;font-size:15px}
+  .transport .cta,.vert .transport .cta{font-size:11px;padding:6px 9px;min-width:0;overflow:hidden;text-overflow:ellipsis}
   #bin{order:2;width:auto;border-radius:0;border-left:0;border-right:0;background:transparent;border:0;flex:none}
   #bin .bar{background:transparent;border:0}
   .clips{display:flex;overflow-x:auto;overflow-y:hidden;padding:0 12px 8px;gap:6px;scroll-snap-type:x proximity}
