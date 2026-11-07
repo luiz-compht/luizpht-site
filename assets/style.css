@@ -87,6 +87,10 @@ img{display:block;max-width:100%}
 .slider i:after{content:"";position:absolute;right:-5px;top:-4px;width:12px;height:12px;border-radius:50%;background:#fff}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chips span{font-size:11px;padding:3px 8px;border-radius:20px;border:1px solid var(--line);background:#ffffff08}
+.vm{display:flex;align-items:center;gap:12px;margin:2px 0 0;font-size:12px}
+.vm .mono{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+.vm a{color:var(--sand);text-decoration:none;border-bottom:1px solid transparent}
+.vm a:hover{border-color:var(--sand)}
 
 /* contato */
 #contact{left:16px;bottom:14px;width:250px;height:170px}
