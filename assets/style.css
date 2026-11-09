@@ -71,7 +71,7 @@ img{display:block;max-width:100%}
 #about{right:16px;top:16px;bottom:150px;width:290px}
 .ins{padding:14px;display:grid;gap:12px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
 .me{position:relative;margin:-14px -14px 0;height:190px;flex:none;overflow:hidden}
-.me img{width:100%;height:100%;object-fit:cover;object-position:50% 22%}
+.me img{width:100%;height:100%;object-fit:cover;object-position:50% 33%}
 .me:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 40%,var(--panel))}
 .me .who{position:absolute;left:14px;bottom:6px;z-index:1;display:grid}
 .me .who b{font-size:20px}.me small{color:var(--sand)}
