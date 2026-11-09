@@ -4,7 +4,7 @@ const WA = 'https://wa.me/5531982943157?text=';
 let clips = [];
 const viewer = $('#viewer'), screen = $('#screen'), poster = $('#poster');
 const mobile = () => matchMedia('(max-width:999px)').matches;
-let cur = -1, playing = false, t0 = 0;
+let cur = -1, playing = false, t0 = 0, off = 0; // off = posição da agulha (s) dentro do clipe atual
 
 const thumb = (c, w) => `https://i.vimeocdn.com/video/${c.dataset.thumb}-d_${w}`;
 const pad = n => String(n).padStart(2, '0');
@@ -88,11 +88,11 @@ function build() {
       x += w;
     });
   });
-  $$('.seg[data-i]').forEach(s => s.addEventListener('click', () => select(+s.dataset.i, true)));
+  // clicar num clipe da timeline só posiciona a agulha (não toca) — ver seek() mais abaixo
   select(0, false);
 }
 
-function select(i, user) {
+function select(i, user, at = 0) {
   if (!clips.length) return;
   i = (i + clips.length) % clips.length;
   const c = clips[i], d = c.dataset, name = c.querySelector('h3').textContent;
@@ -109,18 +109,19 @@ function select(i, user) {
   $('#cta').href = WA + encodeURIComponent(`Olá Luiz! Vi o vídeo "${name}" no seu portfólio e quero um vídeo assim.`);
   $$('.clip,.seg[data-i]').forEach(e => e.classList.toggle('on', e === c || e.dataset.i == i));
   if (user) c.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
-  t0 = performance.now();
+  off = at;
   if (user && !mobile()) play();
 }
 
 function play() {
   const d = clips[cur].dataset;
-  const src = `https://player.vimeo.com/video/${d.id}?${d.h ? 'h=' + d.h + '&' : ''}autoplay=1&title=0&byline=0&portrait=0&color=d6a868&dnt=1`;
+  const src = `https://player.vimeo.com/video/${d.id}?${d.h ? 'h=' + d.h + '&' : ''}autoplay=1&title=0&byline=0&portrait=0&color=d6a868&dnt=1${off >= 1 ? '#t=' + Math.floor(off) + 's' : ''}`;
   screen.insertAdjacentHTML('beforeend', `<iframe src="${src}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="${esc(clips[cur].querySelector('h3').textContent)}"></iframe>`);
   screen.classList.add('playing'); playing = true; t0 = performance.now();
   $('#pp').textContent = '⏸';
 }
 function stop() {
+  if (playing && clips[cur]) off = Math.min(+clips[cur].dataset.dur, off + (performance.now() - t0) / 1000);
   screen.querySelector('iframe')?.remove();
   screen.classList.remove('playing'); playing = false;
   $('#pp').textContent = '▶';
@@ -163,12 +164,36 @@ $('#scrim').onclick = () => openSheet(null);
 const wave = $('#wave');
 for (let i = 0; i < 30; i++) wave.insertAdjacentHTML('beforeend', `<i style="height:${20 + Math.random() * 80}%;animation-delay:${-Math.random()}s"></i>`);
 
-// timecode + agulha percorrendo o clipe selecionado
-const ph = $('#ph');
+// timeline: agulha parada; só anda enquanto o vídeo toca.
+// Clicar/arrastar na régua ou num clipe posiciona a agulha e seleciona o clipe que está embaixo.
+const ph = $('#ph'), lanesEl = $('.lanes');
+function seek(x, lane) {
+  const r = lanesEl.getBoundingClientRect(), pct = Math.max(0, Math.min(99, (x - r.left) / r.width * 100));
+  const segs = [...lane.querySelectorAll('.seg[data-i]')];
+  if (!segs.length) return;
+  const seg = segs.find(s => pct >= parseFloat(s.style.left) && pct <= parseFloat(s.style.left) + parseFloat(s.style.width)) ||
+    segs.reduce((a, s) => Math.abs(parseFloat(s.style.left) - pct) < Math.abs(parseFloat(a.style.left) - pct) ? s : a);
+  const i = +seg.dataset.i, dur = +clips[i].dataset.dur;
+  const at = Math.max(0, Math.min(dur - 0.5, (pct - parseFloat(seg.style.left)) / parseFloat(seg.style.width) * dur));
+  if (i !== cur) select(i, false, at); else { stop(); off = at; }
+}
+lanesEl.addEventListener('pointerdown', e => {
+  if (mobile()) return;
+  const onRuler = e.target.classList.contains('ruler') || e.target === ph;
+  const seg = e.target.closest('.seg[data-i]');
+  if (!onRuler && !seg) return;
+  const lane = seg ? seg.parentElement : (clips[cur]?.dataset.group === 'e' ? $('#laneE') : $('#laneD'));
+  e.preventDefault();
+  seek(e.clientX, lane);
+  const mv = ev => seek(ev.clientX, lane);
+  addEventListener('pointermove', mv);
+  addEventListener('pointerup', () => removeEventListener('pointermove', mv), { once: true });
+});
+lanesEl.addEventListener('dblclick', e => e.target.closest('.seg[data-i]') && !playing && play()); // duplo clique toca
 (function tick() {
   if (cur >= 0 && clips[cur]) {
     const d = clips[cur].dataset, dur = +d.dur;
-    const s = ((performance.now() - t0) / 1000) % dur;
+    const s = playing ? Math.min(dur, off + (performance.now() - t0) / 1000) : off;
     $('#tc').textContent = tc(s);
     const seg = $(`.seg[data-i="${cur}"]`);
     if (seg && !mobile()) ph.style.left = `calc(${seg.style.left} + ${parseFloat(seg.style.width) * s / dur}%)`;
