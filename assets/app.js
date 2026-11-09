@@ -4,7 +4,7 @@ const WA = 'https://wa.me/5531982943157?text=';
 let clips = [];
 const viewer = $('#viewer'), screen = $('#screen'), poster = $('#poster');
 const mobile = () => matchMedia('(max-width:999px)').matches;
-let cur = -1, playing = false, t0 = 0, off = 0; // off = posição da agulha (s) dentro do clipe atual
+let cur = -1, playing = false, running = false, t0 = 0, off = 0; // off = posição da agulha (s) no clipe; running = vídeo tocando de verdade
 
 const thumb = (c, w) => `https://i.vimeocdn.com/video/${c.dataset.thumb}-d_${w}`;
 const pad = n => String(n).padStart(2, '0');
@@ -117,17 +117,29 @@ function play() {
   const d = clips[cur].dataset;
   const src = `https://player.vimeo.com/video/${d.id}?${d.h ? 'h=' + d.h + '&' : ''}autoplay=1&title=0&byline=0&portrait=0&color=d6a868&dnt=1${off >= 1 ? '#t=' + Math.floor(off) + 's' : ''}`;
   screen.insertAdjacentHTML('beforeend', `<iframe src="${src}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="${esc(clips[cur].querySelector('h3').textContent)}"></iframe>`);
-  screen.classList.add('playing'); playing = true; t0 = performance.now();
+  screen.classList.add('playing'); playing = true; running = false; t0 = performance.now();
   $('#pp').textContent = '⏸';
 }
 function stop() {
-  if (playing && clips[cur]) off = Math.min(+clips[cur].dataset.dur, off + (performance.now() - t0) / 1000);
+  if (running && clips[cur]) off = Math.min(+clips[cur].dataset.dur, off + (performance.now() - t0) / 1000);
   screen.querySelector('iframe')?.remove();
-  screen.classList.remove('playing'); playing = false;
+  screen.classList.remove('playing'); playing = running = false;
   $('#pp').textContent = '▶';
 }
+// conversa com o player do Vimeo (postMessage): a agulha só anda quando o vídeo está realmente tocando
+
+const vimeo = method => screen.querySelector('iframe')?.contentWindow.postMessage(JSON.stringify({ method }), 'https://player.vimeo.com');
+addEventListener('message', e => {
+  if (e.origin !== 'https://player.vimeo.com') return;
+  let m; try { m = typeof e.data === 'string' ? JSON.parse(e.data) : e.data; } catch (_) { return; }
+  const send = (method, value) => e.source.postMessage(JSON.stringify({ method, value }), e.origin);
+  if (m.event === 'ready') ['play', 'pause', 'finish', 'ended', 'playProgress', 'timeupdate', 'seek', 'seeked'].forEach(v => send('addEventListener', v));
+  else if (m.event === 'play' || m.event === 'playing') { running = true; t0 = performance.now(); $('#pp').textContent = '⏸'; }
+  else if (/^(pause|ended|finish)$/.test(m.event)) { if (m.data && m.data.seconds != null) off = m.data.seconds; running = false; $('#pp').textContent = '▶'; }
+  if (/^(timeupdate|playProgress|seek|seeked)$/.test(m.event) && m.data && m.data.seconds != null) { off = m.data.seconds; t0 = performance.now(); }
+});
 $('#play').onclick = play;
-$('#pp').onclick = () => playing ? stop() : play();
+$('#pp').onclick = () => !playing ? play() : vimeo(running ? 'pause' : 'play');
 $('#prev').onclick = () => select(cur - 1, true);
 $('#next').onclick = () => select(cur + 1, true);
 
@@ -193,7 +205,7 @@ lanesEl.addEventListener('dblclick', e => e.target.closest('.seg[data-i]') && !p
 (function tick() {
   if (cur >= 0 && clips[cur]) {
     const d = clips[cur].dataset, dur = +d.dur;
-    const s = playing ? Math.min(dur, off + (performance.now() - t0) / 1000) : off;
+    const s = running ? Math.min(dur, off + (performance.now() - t0) / 1000) : off;
     $('#tc').textContent = tc(s);
     const seg = $(`.seg[data-i="${cur}"]`);
     if (seg && !mobile()) ph.style.left = `calc(${seg.style.left} + ${parseFloat(seg.style.width) * s / dur}%)`;
