@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Briefing do vídeo · luizPHT</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Formulário de briefing para clientes de luizPHT.">
+<link rel="icon" href="/assets/img/icone-luizpht.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#080706;--panel:#121010;--panel2:#1b1816;--line:#2f2a25;--txt:#f3ece2;--mut:#a0958a;--gold:#b8864b;--sand:#f6c98c;--bronze:#d6a868;--ink:#120d08;--err:#ff7b6b}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+[hidden]{display:none!important}
+body{min-height:100vh;background:radial-gradient(1200px 600px at 70% -10%,#4a3218 0%,transparent 60%),radial-gradient(900px 500px at 0% 110%,#2a1d10 0%,transparent 60%),var(--bg);background-attachment:fixed;color:var(--txt);font:15px/1.5 "Space Grotesk",system-ui,sans-serif}
+.mono{font-family:"JetBrains Mono",monospace}
+a{color:var(--sand)}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.wrap{max-width:760px;margin:0 auto;padding:28px 16px 60px}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:28px}
+header img{height:30px;width:auto}
+.tag{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+h1{font-size:clamp(26px,6vw,36px);line-height:1.1;margin-bottom:10px}
+h1 em{font-style:normal;color:var(--sand)}
+.lead{color:var(--mut);max-width:60ch;margin-bottom:24px}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border:1px solid var(--gold);border-radius:999px;color:var(--sand);font-size:12px;margin-bottom:18px}
+.badge b{color:var(--txt)}
+.sec{background:#121010e6;border:1px solid var(--line);border-radius:14px;padding:20px 18px;margin-bottom:16px}
+.sec h2{display:flex;align-items:baseline;gap:10px;font-size:18px;margin-bottom:4px}
+.sec h2 .mono{font-size:11px;color:var(--gold)}
+.sec>p.hint{color:var(--mut);font-size:13px;margin-bottom:14px}
+.f{margin-top:16px}
+.f>label,.f>.l{display:block;font-weight:500;margin-bottom:6px}
+.f .opt{color:var(--mut);font-weight:400;font-size:12px}
+.f .req{color:var(--sand)}
+.sub{color:var(--mut);font-size:12px;margin:-2px 0 8px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+input[type=text],input[type=email],input[type=tel],input[type=url],input[type=date],textarea{width:100%;background:var(--panel2);border:1px solid var(--line);border-radius:9px;color:var(--txt);font:inherit;padding:11px 12px;outline:none;transition:border-color .15s}
+textarea{min-height:92px;resize:vertical}
+input:focus,textarea:focus{border-color:var(--bronze)}
+input::placeholder,textarea::placeholder{color:#6f665d}
+input[type=date]{color-scheme:dark}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips label{position:relative;cursor:pointer}
+.chips input{position:absolute;opacity:0;pointer-events:none}
+.chips span{display:inline-block;padding:8px 13px;border:1px solid var(--line);border-radius:999px;background:var(--panel2);font-size:14px;transition:.15s;user-select:none}
+.chips label:hover span{border-color:var(--gold)}
+.chips input:checked+span{background:var(--sand);border-color:var(--sand);color:var(--ink);font-weight:500}
+.chips input:focus-visible+span{outline:2px solid var(--bronze);outline-offset:2px}
+.other{margin-top:8px}
+.drop{display:flex;align-items:center;justify-content:center;gap:10px;border:1px dashed var(--line);border-radius:10px;padding:16px;color:var(--mut);cursor:pointer;text-align:center;font-size:14px}
+.drop:hover{border-color:var(--gold);color:var(--txt)}
+.drop input{display:none}
+.thumbs{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.thumbs div{position:relative;width:72px;height:72px;border-radius:8px;overflow:hidden;border:1px solid var(--line)}
+.thumbs img{width:100%;height:100%;object-fit:cover}
+.thumbs button{position:absolute;top:2px;right:2px;width:22px;height:22px;border-radius:50%;background:#000c;color:#fff;font-size:13px;line-height:22px}
+.or{display:flex;align-items:center;gap:10px;color:var(--mut);font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-top:16px}
+.or:before,.or:after{content:"";flex:1;height:1px;background:var(--line)}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--mut);cursor:pointer;margin-top:4px}
+.check input{margin-top:4px;accent-color:var(--sand);width:16px;height:16px;flex:none}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.btn{flex:1 1 240px;padding:14px 18px;border-radius:10px;font-weight:600;font-size:15px;text-align:center;transition:.15s}
+.btn.pri{background:var(--sand);color:var(--ink)}
+.btn.pri:hover{background:#ffd8a3}
+.btn.sec2{border:1px solid var(--gold);color:var(--sand)}
+.btn.sec2:hover{background:#b8864b22}
+.btn:disabled{opacity:.5;cursor:wait}
+.note{color:var(--mut);font-size:12px;margin-top:12px;text-align:center}
+.msg{display:none;margin-top:14px;padding:12px 14px;border-radius:10px;font-size:14px}
+.msg.err{display:block;background:#ff7b6b18;border:1px solid var(--err);color:#ffc2b8}
+.msg.ok{display:block;background:#b8864b1f;border:1px solid var(--gold);color:var(--sand)}
+.invalid{border-color:var(--err)!important}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.done{display:none;text-align:center;padding:40px 18px}
+.done .big{font-size:44px;margin-bottom:8px}
+.done h2{font-size:26px;margin-bottom:8px}
+.done p{color:var(--mut);max-width:48ch;margin:0 auto 18px}
+.done .actions{justify-content:center}
+.done .btn{flex:0 1 auto}
+footer{color:var(--mut);font-size:12px;text-align:center;margin-top:24px}
+@media (max-width:560px){.grid{grid-template-columns:1fr}.sec{padding:18px 14px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a href="/"><img src="/assets/img/logo-luizpht.png" alt="luizPHT" width="160" height="30"></a>
+    <span class="tag mono">Briefing</span>
+  </header>
+
+  <main id="formArea">
+    <h1>Vamos tirar seu <em>vídeo</em> do papel</h1>
+    <p class="lead">Preencha o que souber. Quase tudo é opcional e dá para só escolher as opções. No final, você recebe uma cópia do briefing no seu e-mail.</p>
+    <div class="badge mono" id="badge" hidden>Vídeo <b id="vidN">1</b> · dados do vídeo anterior mantidos, altere o que for diferente</div>
+
+    <form id="f" novalidate>
+      <div class="hp" aria-hidden="true"><label>Site <input type="text" name="site" tabindex="-1" autocomplete="off"></label></div>
+
+      <section class="sec" data-title="Sobre você e o projeto">
+        <h2><span class="mono">01</span> Sobre você e o projeto</h2>
+        <div class="grid">
+          <div class="f" data-label="Nome" data-key="nome"><label for="nome">Seu nome <span class="req">*</span></label><input type="text" id="nome" autocomplete="name" required></div>
+          <div class="f" data-label="Empresa / marca" data-key="empresa"><label for="empresa">Empresa ou marca <span class="opt">(opcional)</span></label><input type="text" id="empresa" autocomplete="organization"></div>
+          <div class="f" data-label="E-mail" data-key="email"><label for="email">E-mail <span class="req">*</span></label><p class="sub">Para receber a cópia do briefing</p><input type="email" id="email" autocomplete="email" required></div>
+          <div class="f" data-label="WhatsApp" data-key="whatsapp"><label for="whatsapp">WhatsApp <span class="opt">(opcional)</span></label><p class="sub">Com DDD</p><input type="tel" id="whatsapp" autocomplete="tel" placeholder="(31) 99999-9999"></div>
+        </div>
+        <div class="f" data-label="Nome do projeto" data-key="projeto"><label for="projeto">Nome do projeto <span class="req">*</span></label><input type="text" id="projeto" placeholder="Ex.: Lançamento da coleção de verão" required></div>
+      </section>
+
+      <section class="sec" data-title="Sobre este vídeo">
+        <h2><span class="mono">02</span> Sobre este vídeo</h2>
+        <div class="f" data-label="Título do vídeo" data-key="titulo"><label for="titulo">Como vamos chamar este vídeo? <span class="opt">(opcional)</span></label><input type="text" id="titulo" placeholder="Ex.: Reels de lançamento"></div>
+        <div class="f" data-label="Objetivo"><span class="l">Qual o objetivo?</span>
+          <div class="chips">
+            <label><input type="checkbox" name="obj" value="Vender produto/serviço"><span>Vender produto/serviço</span></label>
+            <label><input type="checkbox" name="obj" value="Divulgar a marca"><span>Divulgar a marca</span></label>
+            <label><input type="checkbox" name="obj" value="Cobertura de evento"><span>Cobertura de evento</span></label>
+            <label><input type="checkbox" name="obj" value="Institucional"><span>Institucional</span></label>
+            <label><input type="checkbox" name="obj" value="Conteúdo para redes"><span>Conteúdo para redes</span></label>
+            <label><input type="checkbox" name="obj" value="Anúncio pago"><span>Anúncio pago</span></label>
+          </div>
+          <input type="text" class="other" placeholder="Outro objetivo? Escreva aqui">
+        </div>
+        <div class="f" data-label="Onde vai ser publicado"><span class="l">Onde vai ser publicado?</span>
+          <div class="chips">
+            <label><input type="checkbox" name="onde" value="Reels / Stories"><span>Reels / Stories</span></label>
+            <label><input type="checkbox" name="onde" value="Feed do Instagram"><span>Feed do Instagram</span></label>
+            <label><input type="checkbox" name="onde" value="TikTok"><span>TikTok</span></label>
+            <label><input type="checkbox" name="onde" value="YouTube"><span>YouTube</span></label>
+            <label><input type="checkbox" name="onde" value="Site"><span>Site</span></label>
+            <label><input type="checkbox" name="onde" value="Telão / evento / TV"><span>Telão / evento / TV</span></label>
+            <label><input type="checkbox" name="onde" value="WhatsApp"><span>WhatsApp</span></label>
+          </div>
+        </div>
+        <div class="f" data-label="Formato" data-key="formato"><span class="l">Formato</span>
+          <div class="chips">
+            <label><input type="radio" name="formato" value="Vertical 9:16"><span>Vertical 9:16</span></label>
+            <label><input type="radio" name="formato" value="Horizontal 16:9"><span>Horizontal 16:9</span></label>
+            <label><input type="radio" name="formato" value="Quadrado 1:1"><span>Quadrado 1:1</span></label>
+            <label><input type="radio" name="formato" value="Mais de um formato"><span>Mais de um</span></label>
+            <label><input type="radio" name="formato" value="Não sei / sugira"><span>Não sei</span></label>
+          </div>
+        </div>
+        <div class="f" data-label="Duração" data-key="duracao"><span class="l">Duração</span>
+          <div class="chips">
+            <label><input type="radio" name="dur" value="Até 15 s"><span>Até 15 s</span></label>
+            <label><input type="radio" name="dur" value="Até 30 s"><span>Até 30 s</span></label>
+            <label><input type="radio" name="dur" value="Até 1 min"><span>Até 1 min</span></label>
+            <label><input type="radio" name="dur" value="1 a 3 min"><span>1 a 3 min</span></label>
+            <label><input type="radio" name="dur" value="Mais de 3 min"><span>Mais de 3 min</span></label>
+            <label><input type="radio" name="dur" value="Não sei / sugira"><span>Não sei</span></label>
+          </div>
+        </div>
+        <div class="f" data-label="A ideia" data-key="ideia"><label for="ideia">Conte a ideia <span class="req">*</span></label><p class="sub">Do jeito que vier: o que acontece no vídeo, roteiro, cenas que não podem faltar</p><textarea id="ideia" required></textarea></div>
+        <div class="f" data-label="Mensagem principal / chamada"><label for="cta">Qual a mensagem principal ou chamada final? <span class="opt">(opcional)</span></label><input type="text" id="cta" placeholder="Ex.: Agende pelo WhatsApp · Garanta seu ingresso"></div>
+        <div class="f" data-label="Público"><label for="publico">Para quem é o vídeo? <span class="opt">(opcional)</span></label><input type="text" id="publico" placeholder="Ex.: mulheres 25–45 em BH, clientes da clínica"></div>
+      </section>
+
+      <section class="sec" data-title="Referências">
+        <h2><span class="mono">03</span> Referências</h2>
+        <p class="hint">Vídeos, perfis ou estilos que você curte. Pode mandar link, print ou os dois.</p>
+        <div class="f" data-label="Links de referência"><label for="refs">Links</label><textarea id="refs" placeholder="Cole um link por linha"></textarea></div>
+        <div class="f" data-label="Prints de referência"><span class="l">Prints ou imagens <span class="opt">(até 6)</span></span>
+          <label class="drop"><input type="file" accept="image/*" multiple data-max="6">＋ Adicionar imagens</label><div class="thumbs"></div></div>
+        <div class="f" data-label="O que gosta nas referências"><label for="refsGosta">O que você gosta nelas? <span class="opt">(opcional)</span></label><input type="text" id="refsGosta" placeholder="Ex.: ritmo rápido, cores, as transições, a legenda"></div>
+      </section>
+
+      <section class="sec" data-title="Material">
+        <h2><span class="mono">04</span> Material</h2>
+        <p class="hint">Coloque vídeos, fotos e arquivos numa pasta (Google Drive, WeTransfer, Dropbox…) e cole o link aqui.</p>
+        <div class="f" data-label="Pasta com os arquivos"><label for="pasta">Link da pasta</label><input type="url" id="pasta" placeholder="https://drive.google.com/…"></div>
+        <div class="f" data-label="O que tem no material"><span class="l">O que tem lá?</span>
+          <div class="chips">
+            <label><input type="checkbox" value="Vídeos brutos"><span>Vídeos brutos</span></label>
+            <label><input type="checkbox" value="Fotos"><span>Fotos</span></label>
+            <label><input type="checkbox" value="Logo"><span>Logo</span></label>
+            <label><input type="checkbox" value="Roteiro / textos"><span>Roteiro / textos</span></label>
+            <label><input type="checkbox" value="Áudio / locução"><span>Áudio / locução</span></label>
+            <label><input type="checkbox" value="Manual de marca"><span>Manual de marca</span></label>
+            <label><input type="checkbox" value="Ainda vou enviar"><span>Ainda vou enviar</span></label>
+            <label><input type="checkbox" value="Precisa gravar"><span>Precisa gravar</span></label>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec" data-title="Música e som">
+        <h2><span class="mono">05</span> Música e som</h2>
+        <p class="hint">Use a opção mais fácil para você. Uma basta.</p>
+        <div class="f" data-label="Link da música"><label for="musLink">Link da música</label><input type="url" id="musLink" placeholder="Spotify, YouTube, TikTok…"></div>
+        <div class="or">ou</div>
+        <div class="f" data-label="Print da música"><span class="l">Print com o nome da música</span>
+          <label class="drop"><input type="file" accept="image/*" multiple data-max="2">＋ Adicionar print</label><div class="thumbs"></div></div>
+        <div class="or">ou</div>
+        <div class="f" data-label="Estilo de música"><label for="musEstilo">Digite o estilo</label><input type="text" id="musEstilo" placeholder="Ex.: funk leve, pop anos 80, eletrônica, sertanejo"></div>
+        <div class="or">ou só escolha o clima</div>
+        <div class="f" data-label="Clima (mood)">
+          <div class="chips">
+            <label><input type="checkbox" value="Animado"><span>Animado</span></label>
+            <label><input type="checkbox" value="Emocionante"><span>Emocionante</span></label>
+            <label><input type="checkbox" value="Elegante / premium"><span>Elegante / premium</span></label>
+            <label><input type="checkbox" value="Divertido"><span>Divertido</span></label>
+            <label><input type="checkbox" value="Épico"><span>Épico</span></label>
+            <label><input type="checkbox" value="Calmo"><span>Calmo</span></label>
+            <label><input type="checkbox" value="Urbano"><span>Urbano</span></label>
+            <label><input type="checkbox" value="Corporativo"><span>Corporativo</span></label>
+            <label><input type="checkbox" value="Deixo com você"><span>Deixo com você</span></label>
+          </div>
+        </div>
+        <div class="grid">
+          <div class="f" data-label="Locução / narração"><span class="l">Locução / narração</span>
+            <div class="chips">
+              <label><input type="radio" name="loc" value="Não precisa"><span>Não precisa</span></label>
+              <label><input type="radio" name="loc" value="Tenho o áudio"><span>Tenho o áudio</span></label>
+              <label><input type="radio" name="loc" value="Preciso de locutor"><span>Preciso de locutor</span></label>
+            </div>
+          </div>
+          <div class="f" data-label="Legendas"><span class="l">Legendas</span>
+            <div class="chips">
+              <label><input type="radio" name="leg" value="Sim"><span>Sim</span></label>
+              <label><input type="radio" name="leg" value="Não"><span>Não</span></label>
+              <label><input type="radio" name="leg" value="Sugira"><span>Sugira</span></label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec" data-title="Visual e textos">
+        <h2><span class="mono">06</span> Visual e textos</h2>
+        <div class="f" data-label="Textos na tela"><label for="textos">Textos que precisam aparecer <span class="opt">(opcional)</span></label><textarea id="textos" placeholder="Nome, endereço, preço, @, site, chamada…"></textarea></div>
+        <div class="f" data-label="Cores / identidade"><label for="cores">Cores ou identidade visual <span class="opt">(opcional)</span></label><input type="text" id="cores" placeholder="Ex.: preto e dourado, seguir o Instagram da marca"></div>
+        <div class="f" data-label="Não pode aparecer / evitar"><label for="evitar">Algo que NÃO pode aparecer ou deve evitar? <span class="opt">(opcional)</span></label><input type="text" id="evitar"></div>
+      </section>
+
+      <section class="sec" data-title="Prazo e observações">
+        <h2><span class="mono">07</span> Prazo e observações</h2>
+        <div class="grid">
+          <div class="f" data-label="Prazo desejado" data-key="prazo"><label for="prazo">Para quando você precisa?</label><input type="date" id="prazo"></div>
+          <div class="f" data-label="Data fixa?"><span class="l">Essa data é fixa?</span>
+            <div class="chips">
+              <label><input type="radio" name="fixa" value="Sim, é fixa"><span>Sim, é fixa</span></label>
+              <label><input type="radio" name="fixa" value="Tenho flexibilidade"><span>Tenho flexibilidade</span></label>
+            </div>
+          </div>
+        </div>
+        <div class="f" data-label="Observações"><label for="obs">Mais alguma coisa? <span class="opt">(opcional)</span></label><textarea id="obs"></textarea></div>
+        <div class="f"><label class="check"><input type="checkbox" id="ok" required> Confirmo que as informações deste briefing estão corretas e que recebo uma cópia por e-mail.</label></div>
+      </section>
+
+      <div class="msg" id="msg" role="alert"></div>
+      <div class="actions">
+        <button type="button" class="btn sec2" data-more="1">Enviar e preencher outro vídeo</button>
+        <button type="button" class="btn pri" data-more="0">Enviar briefing</button>
+      </div>
+      <p class="note">Ao enviar outro vídeo, os dados ficam preenchidos. É só alterar o que for diferente.</p>
+    </form>
+  </main>
+
+  <section class="done" id="done">
+    <div class="big">✓</div>
+    <h2>Briefing enviado!</h2>
+    <p id="doneTxt">Recebi tudo. Uma cópia foi enviada para o seu e-mail. Qualquer dúvida, falo com você pelo WhatsApp.</p>
+    <div class="actions">
+      <button type="button" class="btn sec2" id="again">Enviar outro vídeo</button>
+      <a class="btn pri" href="https://wa.me/5531982943157" target="_blank" rel="noopener">Falar no WhatsApp</a>
+    </div>
+  </section>
+
+  <footer class="mono">luizPHT · editor de vídeo · Minas Gerais</footer>
+</div>
+
+<script>
+// Endereço do Google Apps Script (Implantar > App da Web). Ver AGENTS.md, seção "Briefing".
+const API = 'https://script.google.com/macros/s/AKfycbw0SABMOMkiIbnPgj_w0wrbbHCdP2bRrbVymIj7tF2DFoTLffBiu4wXEwcKNIMdvOK5eA/exec';
+const DRAFT = 'briefing-rascunho', VID = 'briefing-video';
+const $ = s => document.querySelector(s), $$ = (s, el = document) => [...el.querySelectorAll(s)];
+const form = $('#f'), msg = $('#msg');
+const store = { get(k) { try { return localStorage.getItem(k) } catch { return null } }, set(k, v) { try { localStorage.setItem(k, v) } catch {} }, del(k) { try { localStorage.removeItem(k) } catch {} } };
+let video = +(store.get(VID) || 1);
+const showVideo = () => { $('#vidN').textContent = video; $('#badge').hidden = video < 2 };
+showVideo();
+
+// ---- imagens: reduz no navegador (máx. 1600 px, JPEG) para enviar leve ----
+const imgs = new Map(); // input -> [{name,type,data,url}]
+function shrink(file) {
+  return new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onerror = rej;
+    r.onload = () => { const im = new Image(); im.onerror = rej; im.onload = () => {
+      const k = Math.min(1, 1600 / Math.max(im.width, im.height));
+      const c = document.createElement('canvas'); c.width = Math.round(im.width * k); c.height = Math.round(im.height * k);
+      const ctx = c.getContext('2d'); ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, c.width, c.height); ctx.drawImage(im, 0, 0, c.width, c.height);
+      const url = c.toDataURL('image/jpeg', .85);
+      res({ name: file.name.replace(/\.[^.]+$/, '') + '.jpg', type: 'image/jpeg', data: url.split(',')[1], url });
+    }; im.src = r.result; };
+    r.readAsDataURL(file);
+  });
+}
+function drawThumbs(inp) {
+  const box = inp.closest('.f').querySelector('.thumbs'), list = imgs.get(inp) || [];
+  box.innerHTML = '';
+  list.forEach((it, i) => {
+    const d = document.createElement('div');
+    d.innerHTML = `<img alt="" src="${it.url}"><button type="button" aria-label="Remover">×</button>`;
+    d.querySelector('button').onclick = () => { list.splice(i, 1); drawThumbs(inp) };
+    box.appendChild(d);
+  });
+}
+$$('input[type=file]').forEach(inp => {
+  imgs.set(inp, []);
+  inp.onchange = async () => {
+    const list = imgs.get(inp), max = +inp.dataset.max;
+    for (const f of [...inp.files]) { if (list.length >= max) break; if (!f.type.startsWith('image/')) continue; try { list.push(await shrink(f)) } catch {} }
+    inp.value = ''; drawThumbs(inp);
+  };
+});
+
+// ---- rascunho: guarda o que foi digitado (sem imagens) caso a página recarregue ----
+const fields = () => $$('input:not([type=file]):not([name=site]),textarea', form);
+function saveDraft() { store.set(DRAFT, JSON.stringify(fields().map(el => el.type === 'checkbox' || el.type === 'radio' ? el.checked : el.value))) }
+function loadDraft() { try { const v = JSON.parse(store.get(DRAFT) || 'null'); if (!v) return; fields().forEach((el, i) => { if (i >= v.length) return; if (el.type === 'checkbox' || el.type === 'radio') el.checked = !!v[i]; else el.value = v[i] }) } catch {} }
+loadDraft();
+form.addEventListener('input', saveDraft); form.addEventListener('change', saveDraft);
+
+// ---- monta o briefing ----
+const fmtDate = v => { const [y, m, d] = v.split('-'); return y ? `${d}/${m}/${y}` : v };
+function valueOf(f) {
+  const parts = [];
+  $$('input,textarea', f).forEach(el => {
+    if (el.type === 'file') return;
+    if (el.type === 'checkbox' || el.type === 'radio') { if (el.checked && el.id !== 'ok') parts.push(el.value) }
+    else if (el.value.trim()) parts.push(el.type === 'date' ? fmtDate(el.value) : el.value.trim());
+  });
+  return parts.join(', ');
+}
+function collect() {
+  const d = { video, site: form.site.value, secoes: [], resumo: {} };
+  $$('.sec', form).forEach(sec => {
+    const s = { titulo: sec.dataset.title, itens: [] };
+    $$('.f[data-label]', sec).forEach(f => {
+      const file = f.querySelector('input[type=file]');
+      const textareaOnly = f.querySelector('textarea') && !f.querySelector('.chips');
+      let valor = file ? '' : (textareaOnly ? f.querySelector('textarea').value.trim() : valueOf(f));
+      const imagens = file ? imgs.get(file).map(({ name, type, data }) => ({ name, type, data })) : [];
+      if (f.dataset.key) d.resumo[f.dataset.key] = valor;
+      if (valor || imagens.length) s.itens.push({ rotulo: f.dataset.label, valor, imagens });
+    });
+    if (s.itens.length) d.secoes.push(s);
+  });
+  Object.assign(d, { nome: d.resumo.nome, email: d.resumo.email, projeto: d.resumo.projeto });
+  return d;
+}
+function validate() {
+  $$('.invalid', form).forEach(el => el.classList.remove('invalid'));
+  const bad = [];
+  ['nome', 'email', 'projeto', 'ideia'].forEach(id => { const el = $('#' + id); if (!el.value.trim()) bad.push(el) });
+  const em = $('#email'); if (em.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em.value.trim())) bad.push(em);
+  if (!$('#ok').checked) bad.push($('#ok'));
+  bad.forEach(el => el.classList.add('invalid'));
+  if (bad.length) { show('err', bad.includes($('#ok')) && bad.length === 1 ? 'Marque a confirmação no final para enviar.' : 'Preencha os campos marcados (nome, e-mail válido, nome do projeto e a ideia) e a confirmação.'); bad[0].scrollIntoView({ behavior: 'smooth', block: 'center' }); bad[0].focus({ preventScroll: true }); return false }
+  return true;
+}
+const show = (cls, t) => { msg.className = 'msg ' + cls; msg.textContent = t };
+
+async function send(more) {
+  if (!validate()) return;
+  const btns = $$('.actions .btn', form);
+  btns.forEach(b => b.disabled = true);
+  show('ok', 'Enviando…');
+  try {
+    if (!API) throw new Error('Formulário ainda não está conectado (falta o endereço do Apps Script).');
+    const ctrl = new AbortController(), t = setTimeout(() => ctrl.abort(), 90000);
+    const r = await fetch(API, { method: 'POST', body: JSON.stringify(collect()), signal: ctrl.signal }); // text/plain: sem preflight CORS
+    clearTimeout(t);
+    const j = await r.json();
+    if (!j.ok) throw new Error(j.erro || 'Erro ao salvar');
+    if (more) {
+      video++; store.set(VID, video); showVideo();
+      $('#titulo').value = ''; $('#ok').checked = false; saveDraft();
+      show('ok', `Vídeo ${video - 1} enviado! Agora preencha o vídeo ${video}: os dados continuam aqui, altere o que for diferente.`);
+      $$('.sec', form)[1].scrollIntoView({ behavior: 'smooth' });
+      setTimeout(() => $('#titulo').focus({ preventScroll: true }), 500);
+    } else {
+      const n = video;
+      // mantém só os dados da pessoa para a próxima vez
+      const keep = ['nome', 'empresa', 'email', 'whatsapp'].map(id => [id, $('#' + id).value]);
+      form.reset(); imgs.forEach((l, inp) => { l.length = 0; drawThumbs(inp) });
+      keep.forEach(([id, v]) => $('#' + id).value = v);
+      saveDraft(); store.set(VID, 1); video = 1; showVideo(); msg.className = 'msg';
+      $('#doneTxt').textContent = (n > 1 ? `Recebi os ${n} briefings. ` : 'Recebi tudo. ') + 'Uma cópia foi enviada para o seu e-mail. Qualquer dúvida, falo com você pelo WhatsApp.';
+      $('#formArea').style.display = 'none'; $('#done').style.display = 'block'; scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  } catch (e) {
+    show('err', (e.name === 'AbortError' ? 'O envio demorou demais.' : e.message) + ' Tente de novo; se continuar, me chame no WhatsApp.');
+  } finally { btns.forEach(b => b.disabled = false) }
+}
+$$('[data-more]').forEach(b => b.onclick = () => send(b.dataset.more === '1'));
+$('#again').onclick = () => { $('#done').style.display = 'none'; $('#formArea').style.display = ''; scrollTo({ top: 0 }) };
+</script>
+</body>
+</html>
